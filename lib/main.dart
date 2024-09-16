@@ -93,7 +93,7 @@ class RailMadadPremium extends StatelessWidget {
             Lottie.asset('assets/train2.json',
                 height: 40), // Animated Train in the header
             SizedBox(width: 8),
-            Text('RailMadad'),
+            Text('ROXX'),
           ],
         ),
         backgroundColor: Colors.red[800],
