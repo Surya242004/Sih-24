@@ -36,11 +36,11 @@ class GetStartedPage extends StatelessWidget {
                 SimpleElevatedButton(
                   color: Colors.green,
                   onPressed: () {
-                    // Navigate to RailMadadPremium UI
+                    // Navigate to WelcomePage
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RailMadadPremium(),
+                        builder: (context) => WelcomePage(),
                       ),
                     );
                   },
@@ -82,7 +82,134 @@ class SimpleElevatedButton extends StatelessWidget {
   }
 }
 
-// RailMadadPremium UI (The one I provided previously)
+// WelcomePage with greeting, animation, and bottom navigation bar
+class WelcomePage extends StatefulWidget {
+  @override
+  _WelcomePageState createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Handle navigation or actions for each item
+    switch (index) {
+      case 0:
+        // Manual Application action
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RailMadadPremium(),
+          ),
+        );
+        break;
+      case 1:
+        // Track the Status action
+        break;
+      case 2:
+        // My Profile action
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Hey ',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Arial', // Use a clean, modern font
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'Passenger',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Arial', // Use a clean, modern font
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            Lottie.asset(
+              'assets/train2.json', // Use the provided train animation
+              height: 200,
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.camera_alt),
+                  label: const Text('Camera'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  onPressed: () {
+                    // Camera action
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.file_upload),
+                  label: const Text('Upload'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                  onPressed: () {
+                    // Upload action
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: 'Manual Application',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.track_changes),
+            label: 'Track the Status',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'My Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
 class RailMadadPremium extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -90,10 +217,9 @@ class RailMadadPremium extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Lottie.asset('assets/train2.json',
-                height: 40), // Animated Train in the header
+            Lottie.asset('assets/train2.json', height: 40), // Animated Train in the header
             SizedBox(width: 8),
-            Text('ROXX'),
+            Text('RailMadad'),
           ],
         ),
         backgroundColor: Colors.red[800],
@@ -192,8 +318,7 @@ class RailMadadPremium extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return Center(
-                        child: Lottie.asset('assets/submit_loading.json',
-                            height: 100),
+                        child: Lottie.asset('assets/submit_loading.json', height: 100),
                       );
                     },
                   );
